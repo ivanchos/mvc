@@ -10,6 +10,8 @@ class Help extends Controller
 			{
 				echo "We are in other.<br />";
 				echo "Optional: {$arg}.<br />";
+				require "models/help_model.php";
+				$model=new Help_Model();
 			}
 	}
 ?>

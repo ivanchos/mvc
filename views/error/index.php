@@ -1,4 +1,4 @@
 <?php
 require "views/header.php";
+echo "<hr />$this->msg";
 ?>
-this is an error
