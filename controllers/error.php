@@ -5,7 +5,7 @@ class Error extends Controller
 			{
 				parent::__construct();
 				echo "We are in error.<br />";
-
+				$this->view->render('error/index');
 			}
 	}
 	
