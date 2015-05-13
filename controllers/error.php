@@ -1,10 +1,11 @@
 <?php
-class Index extends Controller
+class Error extends Controller
 	{
 		function __construct()
 			{
 				parent::__construct();
-				echo "We are in index.<br />";
+				echo "We are in error.<br />";
+
 			}
 	}
 	
