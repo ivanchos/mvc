@@ -11,7 +11,7 @@ class Bootstrap
 					{
 						require "controllers/index.php";
 						$controller=new Index();
-						
+						$controller->index();// if there is no controller render('index/index')
 						return false;
 					}
 				$file="controllers/{$url[0]}.php";
@@ -37,6 +37,7 @@ class Bootstrap
 								$controller->{$url[1]}(); // $controller->function() asigns method to controller
 							}
 					}
+				$controller->index();// if there is no controller render('index/index')
 			}
 	}
 ?>
