@@ -1,11 +1,11 @@
 <?php
 //tells to show on page
-class Index extends Controller
+class Login extends Controller
 	{
 		function __construct()
 			{
 				parent::__construct();
-				$this->view->render('index/index');
+				$this->view->render('login/index');
 			}
 	}
 	

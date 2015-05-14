@@ -1,4 +1,5 @@
 <?php
+//tells to show on page
 class Error extends Controller
 	{
 		function __construct()
