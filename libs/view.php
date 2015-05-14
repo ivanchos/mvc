@@ -3,7 +3,7 @@ class View
 	{
 		function __construct()
 			{
-				echo "This is a view.<br />";
+				//echo "This is a view.<br />";
 			}
 		public function render($name)
 			{

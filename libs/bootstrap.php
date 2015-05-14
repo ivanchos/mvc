@@ -3,11 +3,18 @@ class Bootstrap
 	{
 		function __construct()
 			{
-				$url=$_GET['url'];
+				$url=isset($_GET['url'])?$_GET['url']:null;
 				$url=rtrim($url,'/');
 				$url=explode('/',$url);
 				//print_r($url);
-				$file='controllers/'.$url[0].'.php';
+				if (empty($url[0]))
+					{
+						require "controllers/index.php";
+						$controller=new Index();
+						
+						return false;
+					}
+				$file="controllers/{$url[0]}.php";
 				if (file_exists($file))
 					{
 						require $file;
