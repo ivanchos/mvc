@@ -8,6 +8,11 @@ class Index extends Controller
 			}
 		function index()
 			{
+				echo "inside index index";
+				$this->view->render('index/index');
+			}
+		function details()
+			{
 				$this->view->render('index/index');
 			}
 	}
