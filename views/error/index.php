@@ -1,4 +1,3 @@
 <?php
-require "views/header.php";
-echo "<hr />$this->msg";
+echo $this->msg;
 ?>
