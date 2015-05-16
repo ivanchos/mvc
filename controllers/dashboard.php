@@ -10,13 +10,19 @@ class Dashboard extends Controller
 				if ($logged==false)
 					{
 						Session::destroy();
-						header('Location:login.php');
+						header('Location:../login');
 						exit;
 					}
 			}
 		function index()
 			{
 				$this->view->render('dashboard/index');
+			}
+		function logout()
+			{
+				Session::destroy();
+				header('Location:../login');
+				exit;
 			}
 	}
 ?>
