@@ -13,8 +13,16 @@ class Login_Model extends Model
 				$sth->execute(array(
 				':login'=>$_POST['login'], ':password'=>$_POST['password']
 				)); // $login=$_POST['login'], $password=$_POST['password']
-				$data=$sth->fetchAll();
-				print_r($data);
+				//$data=$sth->fetchAll();
+				$count=$sth->rowCount();
+				if ($count>0)
+					{
+						//login
+					}
+				else
+					{
+						//show an error
+					}
 			}
 	}
 ?>
