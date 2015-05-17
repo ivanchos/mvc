@@ -13,6 +13,7 @@ class Dashboard extends Controller
 						header('Location:../login');
 						exit;
 					}
+				$this->view->js=array('dashboard/js/default.js'); // this path because $js variable is in the view
 			}
 		function index()
 			{
@@ -23,6 +24,11 @@ class Dashboard extends Controller
 				Session::destroy();
 				header('Location:../login');
 				exit;
+			}
+		// AJAX function xhr (XMLHttpRequest)
+		function xhrInsert()
+			{
+				$this->model->xhrInsert();
 			}
 	}
 ?>
