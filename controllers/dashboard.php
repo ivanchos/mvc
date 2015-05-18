@@ -30,5 +30,9 @@ class Dashboard extends Controller
 			{
 				$this->model->xhrInsert();
 			}
+		function xhrGetListings()
+			{
+				$this->model->xhrGetListings();
+			}
 	}
 ?>
