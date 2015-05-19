@@ -10,7 +10,15 @@ $(function()
 				// first this function and then data shows on the page
 				$('.del').click(function()
 					{
+						delItem=$(this);
+						var id=$(this).attr('rel');
+						//alert(id);
 						
+						$.post('dashboard/xhrDeleteListing',{'id':id},function(o)
+							{
+								delItem.parent().remove();
+							}
+						,'json');
 						return false; // not to go to the link
 					}
 				);
@@ -26,7 +34,7 @@ $(function()
 						$('#listInsert').append('<div>'+o.text+'<a class="del" rel="'+o.id+'" href="#">X</a></div>');
 					}
 				,'json');
-				return false; // form handled through JS and not refresh the page
+				return false; // handles form through JS and doesn't refresh the page
 			}
 		);
 	}

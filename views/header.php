@@ -17,7 +17,9 @@
 	?>
 </head>
 <body>
-
+<?php
+Session::init();
+?>
 <div id="header">
 header
 <br />

@@ -34,6 +34,9 @@ class Dashboard extends Controller
 			{
 				$this->model->xhrGetListings();
 			}
-		
+		function xhrDeleteListing()
+			{
+				$this->model->xhrDeleteListing();
+			}
 	}
 ?>
