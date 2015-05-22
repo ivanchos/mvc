@@ -8,9 +8,9 @@ $(function()
 					}
 					
 				// first this function and then data shows on the page
-				$('.del').click(function()
+				$('.del').live('click',function()
 					{
-						delItem=$(this);
+						var delItem=$(this);
 						var id=$(this).attr('rel');
 						//alert(id);
 						

@@ -64,4 +64,3 @@ class Bootstrap
 				return false;
 			}
 	}
-?>
