@@ -13,4 +13,3 @@ class Error extends Controller
 			}
 	}
 	
-?>

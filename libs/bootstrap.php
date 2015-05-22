@@ -27,8 +27,8 @@ class Bootstrap
 				$controller->loadModel($url[0]);
 				if (isset($url[2]))
 					{
-						// if method $url['1'] exists inside controller
-						if (method_exists($controller,$url['1']))
+						// if method $url[1] exists inside controller
+						if (method_exists($controller,$url[1]))
 							{
 								$controller->{$url[1]}($url[2]); // $controller->function() asigns method to controller and parameter1
 							}
@@ -41,7 +41,7 @@ class Bootstrap
 					{
 						if (isset($url[1]))
 							{
-								if (method_exists($controller,$url['1']))
+								if (method_exists($controller,$url[1]))
 									{
 										$controller->{$url[1]}(); // $controller->function() asigns method to controller
 									}
@@ -64,4 +64,3 @@ class Bootstrap
 				return false;
 			}
 	}
-?>

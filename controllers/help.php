@@ -17,4 +17,3 @@ class Help extends Controller
 				$this->view->blah=$model->blah();
 			}
 	}
-?>
