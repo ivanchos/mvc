@@ -1,3 +1,9 @@
 <?php
-echo "This is the help.";
+echo "
+	<h1>Help</h1>
+
+	<p>
+	This is the help.
+	</p>
+";
 ?>
