@@ -12,4 +12,16 @@ class User_Model extends Model
 				return $sth->fetchAll();
 				
 			}
+		public function create($data)
+			{
+				$sth=$this->db->prepare('INSERT INTO users 
+					(`login`, `password`, `role`) 
+					VALUES (:login, :password, :role)
+				');
+				$sth->execute(array(
+					':login'=>$data['login'],
+					':password'=>$data['password'],
+					':role'=>$data['role']
+				));
+			}
 	}

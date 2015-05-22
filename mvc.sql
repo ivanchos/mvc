@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2015 at 03:10 PM
+-- Generation Time: May 22, 2015 at 10:29 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -42,10 +42,7 @@ INSERT INTO `data` (`id`, `text`) VALUES
 (1, 'asdf'),
 (31, 'q'),
 (32, 'qw'),
-(33, 'qwe'),
-(34, 'qwer'),
-(35, 'qwert'),
-(36, 'qwerty');
+(33, 'qwe');
 
 -- --------------------------------------------------------
 
@@ -109,19 +106,21 @@ INSERT INTO `person` (`personid`, `name`, `age`, `gender`) VALUES
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `role` enum('default','admin','owner') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `role`) VALUES
-(1, 'jesse', '3327a2154aa1900fa110ae3d20d27d051ba719ead0396f1a23d6865b2677ed4a', 'owner'),
-(37, 'a', '643b06434070200fc102f3fd35ed83a2c4ef590afd9fccfca2faca332a85d5a5', 'admin'),
-(38, 'jesse', 'a1361cb85be840d6a2d762c68e4910e2 ', 'default');
+(1, 'jesse', 'a1361cb85be840d6a2d762c68e4910e2', 'owner'),
+(2, 'joe', 'a1361cb85be840d6a2d762c68e4910e2', 'default'),
+(3, 'jesse', '3327a2154aa1900fa110ae3d20d27d05', 'admin'),
+(4, 'test', '098f6bcd4621d373cade4e832627b4f6', 'default'),
+(5, 'test22', '4d42bf9c18cb04139f918ff0ae68f8a0', 'default');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
