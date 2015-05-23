@@ -6,9 +6,11 @@ require "libs/view.php";
 
 require "libs/database.php";
 require "libs/session.php";
+require "libs/hash.php";
 
 require "config/paths.php";
 require "config/database.php";
+require "config/constants.php";
 
 $app=new Bootstrap();
 

@@ -23,12 +23,12 @@ class User_Model extends Model
 		public function create($data)
 			{
 				$sth=$this->db->prepare('INSERT INTO users 
-					(`login`, `password`, `role`) 
+					(login, password, role) 
 					VALUES (:login, :password, :role)
 				');
 				$sth->execute(array(
 					':login'=>$data['login'],
-					':password'=>$data['password'],
+					':password'=>Hash::create('md5',$data['password'],HASH_PASSWORD_KEY),
 					':role'=>$data['role']
 				));
 			}
@@ -41,7 +41,7 @@ class User_Model extends Model
 				$sth->execute(array(
 					':id' => $data['id'],
 					':login' => $data['login'],
-					':password' => md5($data['password']),
+					':password' => Hash::create('md5',$data['password'],HASH_PASSWORD_KEY),
 					':role' => $data['role']
 				));
 			}
