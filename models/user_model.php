@@ -41,16 +41,12 @@ class User_Model extends Model
 			}
 		public function editSave($data)
 			{
-				$sth=$this->db->prepare('UPDATE users
-					SET login=:login, password=:password, role=:role
-					WHERE id=:id
-					');
-				$sth->execute(array(
-					':id' => $data['id'],
-					':login' => $data['login'],
-					':password' => Hash::create('md5',$data['password'],HASH_PASSWORD_KEY),
-					':role' => $data['role']
-					));
+				$postData=array(
+					'login'=>$data['login'],
+					'password'=>Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
+					'role'=>$data['role']
+					);
+				$this->db->update('users', $postData, "id={$data['id']}");
 			}
 		public function delete($id)
 			{
