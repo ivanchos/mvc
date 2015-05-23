@@ -6,13 +6,15 @@ class Dashboard extends Controller
 			{
 				parent::__construct();
 				Session::init();
-				$logged=Session::get('loggedIn');
+				//returns value of $_SESSION['loggedIn'] defined in libs/session.php and set in models/login_model.php
+				$logged=Session::get('loggedIn'); 
 				if ($logged==false)
 					{
 						Session::destroy();
 						header('Location:../login');
 						exit;
 					}
+		
 				$this->view->js=array('dashboard/js/default.js'); // this path because $js variable is in the view
 			}
 		function index()
@@ -22,7 +24,7 @@ class Dashboard extends Controller
 		function logout()
 			{
 				Session::destroy();
-				header('Location:../login');
+				header('location:'.URL.'login');
 				exit;
 			}
 		// AJAX function xhr (XMLHttpRequest)
