@@ -22,15 +22,22 @@ class User_Model extends Model
 			}
 		public function create($data)
 			{
-				$sth=$this->db->prepare('INSERT INTO users 
+				$this->db->insert('users', array(
+					'login'=>$data['login'],
+					'password'=>Hash::create('md5', $data['password'], HASH_PASSWORD_KEY),
+					'role'=>$data['role']
+					));
+				/*
+				$sth = $this->db->prepare('INSERT INTO users 
 					(login, password, role) 
 					VALUES (:login, :password, :role)
-				');
+					');
 				$sth->execute(array(
 					':login'=>$data['login'],
-					':password'=>Hash::create('md5',$data['password'],HASH_PASSWORD_KEY),
+					':password'=>hash::create('md5',$_POST['password'],HASH_PASSWORD_KEY),
 					':role'=>$data['role']
-				));
+					));
+				*/
 			}
 		public function editSave($data)
 			{
@@ -43,7 +50,7 @@ class User_Model extends Model
 					':login' => $data['login'],
 					':password' => Hash::create('md5',$data['password'],HASH_PASSWORD_KEY),
 					':role' => $data['role']
-				));
+					));
 			}
 		public function delete($id)
 			{
