@@ -25,7 +25,7 @@ class User extends Controller
 			{
 				$data=array();
 				$data['login']=$_POST['login'];
-				$data['password']=md5($_POST['password']);
+				$data['password']=$_POST['password'];
 				$data['role']=$_POST['role'];
 				$this->model->create($data);
 				header('location:'.URL.'user');
@@ -37,11 +37,11 @@ class User extends Controller
 			}
 		public function editSave($id)
 			{
-				$data = array();
-				$data['id'] = $id;
-				$data['login'] = $_POST['login'];
-				$data['password'] = md5($_POST['password']);
-				$data['role'] = $_POST['role'];
+				$data=array();
+				$data['id']=$id;
+				$data['login']=$_POST['login'];
+				$data['password']=$_POST['password'];
+				$data['role']=$_POST['role'];
 				$this->model->editSave($data);
 				header('location:'.URL.'user');
 			}
