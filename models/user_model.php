@@ -50,9 +50,14 @@ class User_Model extends Model
 			}
 		public function delete($id)
 			{
+				$sth=$this->db->prepare('SELECT role FROM users WHERE id = :id');
+				$sth->execute(array(':id'=>$id));
+				$data=$sth->fetch();
+				if ($data['role']=='owner')
+					{
+						return false;
+					}
 				$sth=$this->db->prepare('DELETE FROM users WHERE id = :id');
-				$sth->execute(array(
-					':id'=>$id
-					));
+				$sth->execute(array(':id'=>$id));
 			}
 	}

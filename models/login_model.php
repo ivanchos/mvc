@@ -7,15 +7,17 @@ class Login_Model extends Model
 			}
 		public function run()
 			{
-				// uses array key (:login, :password) instead array value ($login, $password) because it's a prepared statement in PDO
-				// returns object
+				/* 
+				* uses array key (:login, :password) instead array value ($login, $password) because it's a prepared statement in PDO
+				* $login=$_POST['login'], $password=$_POST['password']
+				* returns object
+				*/
 				$sth=$this->db->prepare("SELECT id, role FROM users WHERE
-				login=:login AND password=:password"); 
-				// $login=$_POST['login'], $password=$_POST['password']
+					login=:login AND password=:password"); 
 				$sth->execute(array(
-				':login'=>$_POST['login'],
-				':password'=>Hash::create('md5',$_POST['password'],HASH_PASSWORD_KEY)
-				)); 
+					':login'=>$_POST['login'],
+					':password'=>Hash::create('sha256',$_POST['password'],HASH_PASSWORD_KEY)
+					)); 
 	
 				$data=$sth->fetch();
 				
