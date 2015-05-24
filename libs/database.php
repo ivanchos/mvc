@@ -8,6 +8,23 @@ class Database extends PDO
 				//parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTIONS);
 			}
 		/**
+		 * select
+		 * @param string $sql An SQL string
+		 * @param array $array Paramters to bind
+		 * @param constant $fetchMode A PDO Fetch mode
+		 * @return mixed
+		 */
+		public function select($sql,$array,$fetchMode = PDO::FETCH_ASSOC)
+			{
+				$sth=$this->prepare($sql);
+				foreach ($array as $key=>$value)
+					{
+						$sth->bindValue(":$key", $value);
+					}
+				$sth->execute();
+				return $sth->fetchAll($fetchMode);
+			}
+		/**
 		 * insert
 		 * @param string $table A name of table to insert into
 		 * @param string $data An associative array
