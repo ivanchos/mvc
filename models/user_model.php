@@ -7,18 +7,11 @@ class User_Model extends Model
 			}
 		public function userList()
 			{
-				$sth=$this->db->prepare('SELECT id, login, role FROM users');
-				$sth->execute();
-				return $sth->fetchAll();
-				
+				return $this->db->select('SELECT id, login, role FROM users');
 			}
 		public function userSingleList($id)
 			{
-				$sth=$this->db->prepare('SELECT id, login, role FROM users WHERE id=:id');
-				$sth->execute(array(
-					':id'=>$id
-					));
-				return $sth->fetch();
+				return $this->db->select('SELECT id, login, role FROM users WHERE id=:id', array(':id'=>$id));
 			}
 		public function create($data)
 			{
@@ -50,14 +43,28 @@ class User_Model extends Model
 			}
 		public function delete($id)
 			{
-				$sth=$this->db->prepare('SELECT role FROM users WHERE id = :id');
-				$sth->execute(array(':id'=>$id));
-				$data=$sth->fetch();
-				if ($data['role']=='owner')
+				$result=$this->db->select('SELECT role FROM users WHERE id=:id', array(':id'=>$id));
+				
+				/*
+				returns multidimensional array because role is array with values (default, admin, owner)
+				Array ( [0] => Array ( [role] => default ) )
+				Array ( [1] => Array ( [role] => default ) )
+				Array ( [2] => Array ( [role] => default ) )
+				...
+				
+				it's only one element for chosen $id, so that's why its index is [0] and $result[0]
+				Array ( [0] => Array ( [role] => default ) )
+				
+				also:
+				change $this->user['id'] into $this->user[0]['id']
+				change $this->user['login'] into $this->user[0]['login']
+				change $this->user['role'] into $this->user[0]['role']
+				in views/user/edit.php
+				*/
+				if ($result[0]['role']=='owner')
 					{
 						return false;
 					}
-				$sth=$this->db->prepare('DELETE FROM users WHERE id = :id');
-				$sth->execute(array(':id'=>$id));
+				$this->db->delete('users', "id='$id'");
 			}
 	}

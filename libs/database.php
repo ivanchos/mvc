@@ -14,12 +14,12 @@ class Database extends PDO
 		 * @param constant $fetchMode A PDO Fetch mode
 		 * @return mixed
 		 */
-		public function select($sql,$array,$fetchMode = PDO::FETCH_ASSOC)
+		public function select($sql,$array=array(),$fetchMode = PDO::FETCH_ASSOC)
 			{
 				$sth=$this->prepare($sql);
 				foreach ($array as $key=>$value)
 					{
-						$sth->bindValue(":$key", $value);
+						$sth->bindValue("$key", $value);
 					}
 				$sth->execute();
 				return $sth->fetchAll($fetchMode);
@@ -64,5 +64,17 @@ class Database extends PDO
 						$sth->bindValue(":$key", $value);
 					}
 				$sth->execute();
+			}
+		/**
+		 * delete
+		 * 
+		 * @param string $table
+		 * @param string $where
+		 * @param integer $limit
+		 * @return integer Affected Rows
+		 */
+		public function delete($table, $where, $limit=1)
+			{
+				return $this->exec("DELETE FROM $table WHERE $where LIMIT $limit");
 			}
 	}
