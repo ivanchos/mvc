@@ -3,8 +3,33 @@
 <head>
 	<title>Test</title>
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/default.css" />
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/sunny/jquery-ui.css" />
+	
+	<!-- 
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.js"></script>
+	-->
+	
+	<!-- 
+	doesn't work with new versions of jquery
+	-->
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/custom.js"></script>
+	
+	<!-- 
+	to test jquery:
+	
+	<script>
+	$(function()
+		{
+			$('#test2').datepicker();
+		}
+	);
+	</script>
+	
+	-->
+	
 	<?php
 	// doesn't have to go $this->view->js because $js is in the view
 	if (isset($this->js))
@@ -15,8 +40,17 @@
 				}
 		}
 	?>
+	
 </head>
 <body>
+
+<!-- 
+to test jquery:
+
+<input id="test2" />
+
+-->
+
 <?php
 Session::init();
 ?>
