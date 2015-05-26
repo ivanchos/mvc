@@ -1,4 +1,5 @@
 <?php
+require "form/val.php";
 /**
  *  - Fill out a form
  *	- POST to PHP
@@ -17,6 +18,9 @@ class Form
 		
 		// @var object $_val - The validator object
 		private $_val=array();
+		
+		//@var array $_error - Holds the current form error
+		private $_error = array();
 		
 		/**
 		 * __construct - Instantiates the validator class
@@ -77,10 +81,10 @@ class Form
 		 */
 		public function val($typeOfValidator, $arg=null)
 			{
-				//$this->_postData[$fieldName]    $fieldName=$this->_currentItem
+				/*
+				$this->_postData[$fieldName]    $fieldName=$this->_currentItem    makes
 				$this->_postData[$this->_currentItem]
 				
-				/*
 				$this->_val is Val object $val
 				$this->_val->{$typeOfValidator}($postItem)    $postItem=$this->_postData[$this->_currentItem]
 				
@@ -88,7 +92,19 @@ class Form
 				$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem], $arg) is same as
 				$this->_val->minlength('jesse', 2) for $this->_currentItem='name'
 				*/
-				$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
+				if ($arg==null)
+					{
+						$error=$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
+					}
+				else
+					{
+						$error=$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem], $arg);
+					}
+					
+				if ($error)
+					{
+						$this->_error[$this->_currentItem]=$error;
+					}
 				
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
