@@ -9,11 +9,22 @@
  */
 class Form
 	{
-		//associative array
+		// @var array $_currentItem - The immediately posted item
+		private $_currentItem=null;
+		
+		// @var associative array $_postData - Stores the posted data
 		private $_postData=array();
+		
+		// @var object $_val - The validator object
+		private $_val=array();
+		
+		/**
+		 * __construct - Instantiates the validator class
+		 * 
+		 */
 		public function __construct()
 			{
-				
+				$this->_val=new Val();
 			}
 			
 		/**
@@ -25,6 +36,7 @@ class Form
 			{
 				//returns value of the array element with the key $field
 				$this->_postData[$field]=$_POST[$field];
+				$this->_currentItem=$field;
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
 			}
@@ -63,8 +75,21 @@ class Form
 		 * @param string $typeOfValidator A method from the Form/Val class
 		 * @param string $arg A property to validate against
 		 */
-		public function val()
+		public function val($typeOfValidator, $arg=null)
 			{
+				//$this->_postData[$fieldName]    $fieldName=$this->_currentItem
+				$this->_postData[$this->_currentItem]
+				
+				/*
+				$this->_val is Val object $val
+				$this->_val->{$typeOfValidator}($postItem)    $postItem=$this->_postData[$this->_currentItem]
+				
+				example:
+				$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem], $arg) is same as
+				$this->_val->minlength('jesse', 2) for $this->_currentItem='name'
+				*/
+				$this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
+				
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
 			}
