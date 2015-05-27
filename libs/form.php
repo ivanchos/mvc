@@ -10,7 +10,7 @@ require "form/val.php";
  */
 class Form
 	{
-		// @var array $_currentItem - The immediately posted item
+		// @var string $_currentItem - The immediately posted item
 		private $_currentItem=null;
 		
 		// @var associative array $_postData - Stores the posted data
@@ -40,7 +40,17 @@ class Form
 			{
 				//returns value of the array element with the key $field
 				$this->_postData[$field]=$_POST[$field];
+				//returns string
 				$this->_currentItem=$field;
+				
+				/*
+				echo "$this->_currentItem<br />";     returns
+				
+				name
+				age
+				gender
+				*/
+				
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
 			}
@@ -68,7 +78,6 @@ class Form
 					}
 				else
 					{
-						// returns array, it's not a function
 						return $this->_postData;
 					}
 			}
@@ -106,7 +115,27 @@ class Form
 						$this->_error[$this->_currentItem]=$error;
 					}
 				
+				//echo "<pre>";
+				//print_r($this->_error);
+				
+				
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
+			}
+		public function submit()
+			{
+				if (empty($this->_error)) 
+					{
+						return true;
+					} 
+				else 
+					{
+						$str='';
+						foreach ($this->_error as $key=>$value)
+							{
+								$str.=$key.'=>'.$value."\n<br />";
+							}
+						throw new Exception($str);
+					}
 			}
 	}

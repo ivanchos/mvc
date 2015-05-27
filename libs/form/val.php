@@ -9,14 +9,14 @@ class Val
 			{
 				if (strlen($data)<$arg)
 					{
-						return "Your string can only be $arg long";
+						return "Your string must be minimum $arg character(s) long";
 					}
 			}
 		public function maxlength($data, $arg)
 			{
 				if (strlen($data)>$arg)
 					{
-						return "Your string can only be $arg long";
+						return "Your string must be maximum $arg character(s) long";
 					}
 			}
 		public function digit($data)
@@ -26,5 +26,13 @@ class Val
 					{
 						return "Your string must be a digit";
 					}
+			}
+		/*
+		__call() magic method is triggered when calling inaccessible methods $name with arguments $arguments in an object 
+		__CLASS__ is magic constant for class name and includes the namespace where it was declared 
+		*/
+		public function __call($name, $arguments) 
+			{
+				throw new Exception("$name does not exist inside of: " . __CLASS__);
 			}
 	}
