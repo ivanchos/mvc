@@ -122,6 +122,14 @@ class Form
 				// returns form object needed for chaining the methods in test/form.php
 				return $this;
 			}
+			
+		/**
+		 * submit - Handles the form, throws an exception upon error.
+		 * 
+		 * @return boolean
+		 * 
+		 * @throws Exception 
+		 */
 		public function submit()
 			{
 				if (empty($this->_error)) 
