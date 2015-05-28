@@ -12,7 +12,7 @@ class Login_Model extends Model
 				* $login=$_POST['login'], $password=$_POST['password']
 				* returns object
 				*/
-				$sth=$this->db->prepare("SELECT id, role FROM users WHERE
+				$sth=$this->db->prepare("SELECT userid, role FROM users WHERE
 					login=:login AND password=:password"); 
 				$sth->execute(array(
 					':login'=>$_POST['login'],
@@ -27,6 +27,7 @@ class Login_Model extends Model
 						Session::init();
 						Session::set('role', $data['role']);
 						Session::set('loggedIn', true);
+						Session::set('userid', $data['userid']);
 						header('Location:../dashboard');
 					}
 				else
