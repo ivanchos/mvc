@@ -5,6 +5,7 @@ class Dashboard extends Controller
 		function __construct()
 			{
 				parent::__construct();
+				/*
 				Session::init();
 				//returns value of $_SESSION['loggedIn'] defined in libs/session.php and set in models/login_model.php
 				$logged=Session::get('loggedIn'); 
@@ -14,7 +15,8 @@ class Dashboard extends Controller
 						header('Location:../login');
 						exit;
 					}
-		
+		        */
+				Auth::handleLogin();
 				$this->view->js=array('dashboard/js/default.js'); // this path because $js variable is in the view
 			}
 		function index()

@@ -2,12 +2,12 @@
 
 <?php
 /*
-can go $this->user[0] because it's multidimensional array with one element [0] and that's array with values (id, login, role)
-function userSingleList($id) from models/user_model.php
+can go $this->user[0] because it's multidimensional array with one element [0] and that's array with values (userid, login, role)
+function userSingleList($userid) from models/user_model.php
 */
 print_r($this->user);
 ?>
-<form method="post" action="<?php echo URL;?>user/editSave/<?php echo $this->user[0]['id']; ?>">
+<form method="post" action="<?php echo URL;?>user/editSave/<?php echo $this->user[0]['userid']; ?>">
 	<label>Login</label><input type="text" name="login" value="<?php echo $this->user[0]['login']; ?>" /><br />
 	<label>Password</label><input type="text" name="password" /><br />
 	<label>Role</label>

@@ -5,6 +5,7 @@ class User extends Controller
 		public function __construct()
 			{
 				parent::__construct();
+				/*
 				Session::init();
 				//returns value of $_SESSION['loggedIn'] defined in libs/session.php and set in models/login_model.php
 				$logged=Session::get('loggedIn'); 
@@ -15,6 +16,8 @@ class User extends Controller
 						header('Location:../login');
 						exit;
 					}
+				*/
+				Auth::handleLogin();
 			}
 		public function index()
 			{
@@ -30,24 +33,24 @@ class User extends Controller
 				$this->model->create($data);
 				header('location:'.URL.'user');
 			}
-		public function edit($id)
+		public function edit($userid)
 			{
-				$this->view->user = $this->model->userSingleList($id);
+				$this->view->user = $this->model->userSingleList($userid);
 				$this->view->render('user/edit');
 			}
-		public function editSave($id)
+		public function editSave($userid)
 			{
 				$data=array();
-				$data['id']=$id;
+				$data['userid']=$userid;
 				$data['login']=$_POST['login'];
 				$data['password']=$_POST['password'];
 				$data['role']=$_POST['role'];
 				$this->model->editSave($data);
 				header('location:'.URL.'user');
 			}
-		public function delete($id)
+		public function delete($userid)
 			{
-				$this->model->delete($id);
+				$this->model->delete($userid);
 				header('location:'.URL.'user');
 			}
 	}

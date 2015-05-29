@@ -68,6 +68,7 @@ endif;
 if (Session::get('loggedIn')==true):
 ?>
 	<a href="<?php echo URL; ?>dashboard">Dashboard</a>
+	<a href="<?php echo URL; ?>note">Notes</a>
 		<?php
 		if (Session::get('role')=='owner'):
 		?>

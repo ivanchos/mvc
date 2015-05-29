@@ -7,6 +7,7 @@ require "config/constants.php";
 this all goes in config.php and config folder is ready to delete
 */
 require "config.php";
+require "util/auth.php";
 
 /*
 require "libs/bootstrap.php";

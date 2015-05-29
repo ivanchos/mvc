@@ -1,9 +1,9 @@
 <?php
 class Help_Model extends Model
 	{
-		function __construct()
+		public function __construct()
 			{
-				echo "Help model.";
+				parent::__construct();
 			}
 		function blah()
 			{
