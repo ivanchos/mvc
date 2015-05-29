@@ -26,16 +26,18 @@ class Note extends Controller
 			}
 		public function create()
 			{
-				/*
+				
 				$data=array(
 					'title'=>$_POST['title'],
 					'content'=>$_POST['content'],
 					);
+				/*
 				same as:
-				*/
+				
 				$data=array();
 				$data['title']=$_POST['title'];
 				$data['content']=$_POST['content'];
+				*/
 				$this->model->create($data);
 				header('location:'.URL.'note');
 			}
@@ -68,9 +70,9 @@ class Note extends Controller
 				$this->model->editSave($data);
 				header('location:'.URL.'note');
 			}
-		public function delete($id)
+		public function delete($noteid)
 			{
-				$this->model->delete($id);
-				header('location:'.URL.'user');
+				$this->model->delete($noteid);
+				header('location:'.URL.'note');
 			}
 	}

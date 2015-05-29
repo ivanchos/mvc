@@ -23,17 +23,6 @@ class Note_Model extends Model
 					'content'=>$data['content'],
 					'date_added'=>date('Y-m-d H:i:s')
 					));
-				/*
-				$sth = $this->db->prepare('INSERT INTO users 
-					(login, password, role) 
-					VALUES (:login, :password, :role)
-					');
-				$sth->execute(array(
-					':login'=>$data['login'],
-					':password'=>hash::create('md5',$_POST['password'],HASH_PASSWORD_KEY),
-					':role'=>$data['role']
-					));
-				*/
 			}
 		public function editSave($data)
 			{
