@@ -73,36 +73,36 @@ class Bootstrap
 		 */
 		private function _callControllerMethod()
 			{
-				if (isset($this->_url[2]))
+				$length=count($this->_url);
+				if ($length>1)
 					{
-						// if method $this->_url[1] exists inside controller
-						if (method_exists($this->_controller,$this->_url[1]))
-							{
-								// $controller->function() asigns method to controller and parameter1
-								$this->_controller->{$this->_url[1]}($this->_url[2]); 
-							}
-						else
+						if (!method_exists($this->_controller,$this->_url[1]))
 							{
 								$this->_error();
 							}
 					}
-				else
+				// determines what to load
+				switch ($length)
 					{
-						if (isset($this->_url[1]))
-							{
-								if (method_exists($this->_controller,$this->_url[1]))
-									{
-										$this->_controller->{$this->_url[1]}(); // $this->_controller->function() asigns method to controller
-									}
-								else
-									{
-										$this->_error();
-									}
-							}
-						else
-							{
-								$this->_controller->index();
-							}
+						case 5:
+							//controller->method(param1,param2,param3)
+							$this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3],$this->_url[4]);
+							break;
+						case 4:
+							//controller->method(param1,param2)
+							$this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3]);
+							break;
+						case 3:
+							//controller->method(param1)
+							$this->_controller->{$this->_url[1]}($this->_url[2]);
+							break;
+						case 2:
+							//controller->method()
+							$this->_controller->{$this->_url[1]}();
+							break;
+						default:
+							$this->_controller->index();
+							break;
 					}
 			}
 		
