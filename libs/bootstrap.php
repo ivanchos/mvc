@@ -2,6 +2,7 @@
 class Bootstrap
 	{
 		private $_url=null;
+		private $_controller=null;
 		
 		function __construct()
 			{
@@ -35,23 +36,23 @@ class Bootstrap
 		private function _loadDefaultController()
 			{
 				require "controllers/index.php";
-				$controller=new Index();
-				$controller->index();// if there is no controller render('index/index')
+				$this->_controller=new Index();
+				$this->_controller->index();// if there is no controller render('index/index')
 			}
 			
 		/**
-		 * Loads existing controller if there is a GET parameter passed
+		 * loads existing controller if there is a GET parameter passed
 		 * 
 		 * @return boolean|string
 		 */
 		private function _loadExistingController()
 			{
-				$file="controllers/{$url[0]}.php";
+				$file="controllers/{$this->_url[0]}.php";
 				if (file_exists($file))
 					{
 						require $file;
-						$controller=new $url[0];
-						$controller->loadModel($url[0]);
+						$this->_controller=new $this->_url[0];
+						$this->_controller->loadModel($this->_url[0]);
 					}
 				else
 					{
@@ -61,7 +62,7 @@ class Bootstrap
 			}
 		
 		/**
-		 * If a method is passed in the GET url paremter
+		 * if a method is passed in the GET url paremter
 		 * 
 		 *  http://localhost/controller/method/(param)/(param)/(param)
 		 *  url[0] = controller
@@ -72,12 +73,13 @@ class Bootstrap
 		 */
 		private function _callControllerMethod()
 			{
-				if (isset($url[2]))
+				if (isset($this->_url[2]))
 					{
-						// if method $url[1] exists inside controller
-						if (method_exists($controller,$url[1]))
+						// if method $this->_url[1] exists inside controller
+						if (method_exists($this->_controller,$this->_url[1]))
 							{
-								$controller->{$url[1]}($url[2]); // $controller->function() asigns method to controller and parameter1
+								// $controller->function() asigns method to controller and parameter1
+								$this->_controller->{$this->_url[1]}($this->_url[2]); 
 							}
 						else
 							{
@@ -86,11 +88,11 @@ class Bootstrap
 					}
 				else
 					{
-						if (isset($url[1]))
+						if (isset($this->_url[1]))
 							{
-								if (method_exists($controller,$url[1]))
+								if (method_exists($this->_controller,$this->_url[1]))
 									{
-										$controller->{$url[1]}(); // $controller->function() asigns method to controller
+										$this->_controller->{$this->_url[1]}(); // $this->_controller->function() asigns method to controller
 									}
 								else
 									{
@@ -99,16 +101,21 @@ class Bootstrap
 							}
 						else
 							{
-								$controller->index();
+								$this->_controller->index();
 							}
 					}
 			}
-			
+		
+		/**
+		 * displays an error page if nothing exists
+		 * 
+		 * @return boolean
+		 */
 		private function _error()
 			{
 				require "controllers/error.php";
-				$controller=new Error();
-				$controller->index();
+				$this->_controller=new Error();
+				$this->_controller->index();
 				return false;
 			}
 	}
