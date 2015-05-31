@@ -8,6 +8,7 @@ class Help extends Controller
 			}
 		function index()
 			{
+				$this->view->title="Help";
 				$this->view->render('help/index');
 			}
 		public function other($arg=false)

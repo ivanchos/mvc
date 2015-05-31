@@ -8,6 +8,7 @@ class Login extends Controller
 			}
 		function index()
 			{
+				$this->view->title="Login";
 				$this->view->render('login/index');
 			}
 		// function called from login form in views/login/index.php

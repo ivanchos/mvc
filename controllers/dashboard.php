@@ -21,6 +21,7 @@ class Dashboard extends Controller
 			}
 		function index()
 			{
+				$this->view->title="Dashboard";
 				$this->view->render('dashboard/index');
 			}
 		function logout()

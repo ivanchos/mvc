@@ -11,10 +11,7 @@ class Index extends Controller
 				//echo Hash::create('sha256','jesse',HASH_PASSWORD_KEY);
 				//echo Hash::create('sha256','test2',HASH_PASSWORD_KEY);
 				//echo "inside index index";
-				$this->view->render('index/index');
-			}
-		function details()
-			{
+				$this->view->title="Home";
 				$this->view->render('index/index');
 			}
 	}
