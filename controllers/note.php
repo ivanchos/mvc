@@ -43,7 +43,6 @@ class Note extends Controller
 			}
 		public function edit($noteid)
 			{
-				echo $noteid;
 				$this->view->note=$this->model->noteSingleList($noteid);
 				/*
 				if (empty($this->view->note))
