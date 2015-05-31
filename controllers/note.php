@@ -23,7 +23,9 @@ class Note extends Controller
 			{
 				$this->view->title="Notes";
 				$this->view->noteList=$this->model->noteList();
+				$this->view->render('header');
 				$this->view->render('note/index');
+				$this->view->render('footer');
 			}
 		public function create()
 			{
@@ -52,7 +54,9 @@ class Note extends Controller
 					}
 				*/
 				$this->view->title="Edit note";
+				$this->view->render('header');
 				$this->view->render('note/edit');
+				$this->view->render('footer');
 			}
 		public function editSave($noteid)
 			{
