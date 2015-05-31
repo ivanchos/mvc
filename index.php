@@ -26,7 +26,19 @@ function __autoload($class)
 		require LIBS."$class.php";
 	}
 
-$app=new Bootstrap();
+// loads the Bootstrap
+$bootstrap=new bootstrap();
+/*
+optional paths and files
 
+example:
+$bootstrap->setControllerPath('/controllers');
+$bootstrap->setModelPath('/models');
+// file from folder controllers
+$bootstrap->setDefaultFile('index.php');
+// file from folder controllers
+$bootstrap->setErrorFile('error.php');
+*/
+$bootstrap->init();
 
 

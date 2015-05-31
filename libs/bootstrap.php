@@ -3,8 +3,19 @@ class Bootstrap
 	{
 		private $_url=null;
 		private $_controller=null;
+		//always includes trailing slash
+		private $_controllerPath="controllers/";
+		//always includes trailing slash
+		private $_modelPath="models/";
+		private $_errorFile="error.php";
+		private $_defaultFile="index.php";
 		
-		function __construct()
+		/**
+		 * starts the Bootstrap
+		 * 
+		 * @return boolean
+		 */
+		public function init()
 			{
 				// Sets the protected $_url
 				$this->_getUrl();
@@ -18,7 +29,43 @@ class Bootstrap
 				$this->_loadExistingController();
 				$this->_callControllerMethod();
 			}
+		
+		/**
+		 * (optional) sets a custom path to controllers
+		 * @param string $path
+		 */
+		public function setControllerPath($path)
+			{
+				$this->_controllerPath=trim($path,'/').'/';
+			}
 			
+		 /**
+		 * (optional) sets a custom path to models
+		 * @param string $path
+		 */
+		public function setModelPath($path)
+			{
+				$this->_modelPath=trim($path,'/').'/';
+			}
+			
+		/**
+		 * (optional) sets a custom path to the error file
+		 * @param string $path - uses the file name of controller, eg: error.php
+		 */
+		public function setErrorFile($path)
+			{
+				$this->_errorFile=trim($path,'/');
+			}
+			
+		/**
+		 * (optional) sets a custom path to the default file
+		 * @param string $path - uses the file name of controller, eg: index.php
+		 */
+		public function setDefaultFile($path)
+			{
+				$this->_defaultFile=trim($path,'/');
+			}
+		
 		/**
 		 * fetches the $_GET from 'url'
 		 */	
@@ -27,6 +74,7 @@ class Bootstrap
 				$url=isset($_GET['url'])?$_GET['url']:null;
 				$url=rtrim($url,'/');
 				$url = filter_var($url,FILTER_SANITIZE_URL);
+				// returns an array
 				$this->_url=explode('/',$url);
 			}
 			
@@ -35,9 +83,11 @@ class Bootstrap
 		 */	
 		private function _loadDefaultController()
 			{
-				require "controllers/index.php";
+				//require "controllers/index.php";
+				require $this->_controllerPath.$this->_defaultFile;
 				$this->_controller=new Index();
-				$this->_controller->index();// if there is no controller render('index/index')
+				// if there is no controller render('index/index')
+				$this->_controller->index();
 			}
 			
 		/**
@@ -47,12 +97,20 @@ class Bootstrap
 		 */
 		private function _loadExistingController()
 			{
-				$file="controllers/{$this->_url[0]}.php";
+				/*some file from controllers folder
+				
+				example:
+				(user, note, login...)
+				//$file="controllers/{$this->_url[0]}.php";
+				*/
+				$file=$this->_controllerPath.$this->_url[0].'.php'; 
 				if (file_exists($file))
 					{
 						require $file;
+						//$file (class) from above extends class controller with method loadModel()
 						$this->_controller=new $this->_url[0];
-						$this->_controller->loadModel($this->_url[0]);
+						//file from models folder
+						$this->_controller->loadModel($this->_url[0],$this->_modelPath);
 					}
 				else
 					{
@@ -113,7 +171,8 @@ class Bootstrap
 		 */
 		private function _error()
 			{
-				require "controllers/error.php";
+				//require "controllers/error.php";
+				require $this->_controllerPath.$this->_errorFile; 
 				$this->_controller=new Error();
 				$this->_controller->index();
 				return false;
