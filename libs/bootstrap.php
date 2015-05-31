@@ -175,6 +175,16 @@ class Bootstrap
 				require $this->_controllerPath.$this->_errorFile; 
 				$this->_controller=new Error();
 				$this->_controller->index();
-				return false;
+				/*
+				Enters contoller with false name.
+				When non existed (false name) controller is entered, executes init() function in bootstrap and
+				$this->_loadExistingController(). There is no existed controller (no $file) in _loadExistingController(),
+				so executes $this->_error(), goes to $this->_controller->index(). Doesn't return false though it should. 
+				This makes error bug and goes to $this->_callControllerMethod() in init() function. Function _callControllerMethod()
+				finds $length=1 and goes to switch() default:$this->_controller->index(). That's why $this->_controller->index()
+				executes twice and shows twice header, error message and footer.
+				*/
+				//return false;
+				exit;
 			}
 	}

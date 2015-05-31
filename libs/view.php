@@ -8,9 +8,11 @@ class View
 			}
 		public function render($name,$noInclude=false)
 			{
+				/*
 				if ($noInclude==true)
 					{
-						require "views/{$name}.php"; //if it says not to load header and footer, then loads only content
+						//if it says not to load header and footer, then loads only content
+						require "views/{$name}.php"; 
 					}
 				else
 					{
@@ -18,6 +20,8 @@ class View
 						require "views/{$name}.php";
 						require "views/footer.php";
 					}
+				*/
+				require "views/{$name}.php";
 			}
 	}
 	

@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test</title>
+	<title>
+	<?php
+	if (isset($this->title))
+		{
+			echo $this->title;
+		}
+	else
+		{
+			echo "MVC";
+		}
+	?>
+	</title>
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/default.css" />
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/sunny/jquery-ui.css" />
 	
